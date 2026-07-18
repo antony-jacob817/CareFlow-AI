@@ -1,4 +1,4 @@
-# CareFlow AI: Predictive Telemetry & Clinical Decision Support System
+# 📈 CareFlow AI: Predictive Telemetry & Clinical Decision Support System
 
 CareFlow AI is an enterprise-grade, full-stack predictive healthcare dashboard designed to mitigate clinical **Alarm Fatigue** in intensive care environments. By replacing traditional, isolated metric alerts with a multivariate Deep Learning pipeline, CareFlow AI tracks complex physiological trajectories over a rolling 24-hour window to predict multi-system patient deterioration before it occurs.
 
