@@ -2,6 +2,8 @@
 
 CareFlow AI is an enterprise-grade, full-stack predictive healthcare dashboard designed to mitigate clinical **Alarm Fatigue** in intensive care environments. By replacing traditional, isolated metric alerts with a multivariate Deep Learning pipeline, CareFlow AI tracks complex physiological trajectories over a rolling 24-hour window to predict multi-system patient deterioration before it occurs.
 
+![CareFlow AI Platform Banner](./public/cover.png)
+
 ---
 
 ## 🚀 Live Access
@@ -17,7 +19,8 @@ CareFlow AI operates as a unified platform leveraging a **monorepo architecture*
 ```
 
 ├── backend                # Django + TensorFlow Inference Framework
-└── frontend               # React + TypeScript + Tailwind UX Layer
+├── frontend               # React + TypeScript + Tailwind UX Layer
+└── public                 # Cover page
 
 ```
 
