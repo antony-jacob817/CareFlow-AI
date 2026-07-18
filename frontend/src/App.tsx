@@ -37,9 +37,12 @@ export default function App() {
   useEffect(() => {
     const fetchPatients = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/patients/`);
-        setPatients(response.data);
-        if (response.data.length > 0) setSelectedPatient(response.data[0]); 
+        const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+        const response = await axios.get(`${API_URL}/api/patients/`);
+        if (Array.isArray(response.data)) {
+          setPatients(response.data);
+          if (response.data.length > 0) setSelectedPatient(response.data[0]); 
+        }
       } catch (error) {
         console.error("Error fetching patients:", error);
       }
@@ -99,7 +102,8 @@ export default function App() {
         spo2: Number(d.spo2)
       }));
 
-      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/predict/`, { vitals: cleanPayload });
+      const API_URL = import.meta.env.VITE_API_URL || 'http://127.0.0.1:8000';
+      const response = await axios.post(`${API_URL}/api/predict/`, { vitals: cleanPayload });
       const score = response.data.risk_score;
       setRiskScore(score);
       
