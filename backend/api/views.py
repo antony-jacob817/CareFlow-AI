@@ -6,6 +6,7 @@ import joblib
 import numpy as np
 import os
 import json
+import gc
 
 BASE_DIR = settings.BASE_DIR
 MODEL_PATH = os.path.join(BASE_DIR, 'model_artifacts', 'ews_lstm_model.h5')
@@ -14,6 +15,8 @@ SCALER_PATH = os.path.join(BASE_DIR, 'model_artifacts', 'vitals_scaler.pkl')
 print("Loading AI Model into Django memory...")
 model = tf.keras.models.load_model(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
+gc.collect()
+print("Garbage collector cleared memory footprint post-initialization.")
 print("Model loaded successfully.")
 
 @api_view(['POST'])
