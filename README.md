@@ -5,8 +5,8 @@ CareFlow AI is an enterprise-grade, full-stack predictive healthcare dashboard d
 ---
 
 ## 🚀 Live Access
-* **Frontend Dashboard (Vercel):** [PASTE_YOUR_VERCEL_LIVE_URL_HERE]
-* **AI Telemetry Backend (Render):** [PASTE_YOUR_RENDER_LIVE_URL_HERE]
+* **Frontend Dashboard (Vercel):** https://care-flow-ai-seven.vercel.app/
+* **AI Telemetry Backend (Render):** https://careflow-ai-dosx.onrender.com
 
 ---
 
