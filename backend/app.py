@@ -22,14 +22,25 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, 'model_artifacts', 'ews_lstm_model.h5')
 SCALER_PATH = os.path.join(BASE_DIR, 'model_artifacts', 'vitals_scaler.pkl')
 
-print("Loading AI Model into memory...")
-model = tf.keras.models.load_model(MODEL_PATH)
-scaler = joblib.load(SCALER_PATH)
-gc.collect()
-print("Model loaded successfully.")
+model = None
+scaler = None
+
+def load_resources():
+    global model, scaler
+
+    if model is None or scaler is None:
+        print("Loading AI model...")
+
+        model = tf.keras.models.load_model(MODEL_PATH, compile=False)
+        scaler = joblib.load(SCALER_PATH)
+
+        gc.collect()
+
+        print("AI model loaded successfully.")
 
 @app.post("/api/predict/")
 async def predict_risk(request: Request):
+    load_resources()
     try:
         body = await request.json()
         data = body.get('vitals', [])
