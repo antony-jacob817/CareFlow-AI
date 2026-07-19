@@ -4,11 +4,9 @@ import joblib
 import gc
 import numpy as np
 import tensorflow as tf
-import gradio as gr
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 from fastapi.middleware.cors import CORSMiddleware
-import uvicorn
 
 app = FastAPI()
 
@@ -24,11 +22,11 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 MODEL_PATH = os.path.join(BASE_DIR, 'model_artifacts', 'ews_lstm_model.h5')
 SCALER_PATH = os.path.join(BASE_DIR, 'model_artifacts', 'vitals_scaler.pkl')
 
-print("Loading AI Model into Hugging Face memory...")
+print("Loading AI Model into memory...")
 model = tf.keras.models.load_model(MODEL_PATH)
 scaler = joblib.load(SCALER_PATH)
 gc.collect()
-print("Model loaded successfully on ZeroGPU infrastructure.")
+print("Model loaded successfully.")
 
 @app.post("/api/predict/")
 async def predict_risk(request: Request):
@@ -64,10 +62,7 @@ async def get_patients():
     except FileNotFoundError:
         return JSONResponse({"error": "patients_db.json not found."}, status_code=500)
 
-with gr.Blocks() as demo:
-    gr.Markdown("# 📈 CareFlow AI Live API running on ZeroGPU")
-
-app = gr.mount_gradio_app(app, demo, path="/")
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="127.0.0.1", port=7860)
+    port = int(os.environ.get("PORT", 7860))
+    uvicorn.run(app, host="0.0.0.0", port=port)
