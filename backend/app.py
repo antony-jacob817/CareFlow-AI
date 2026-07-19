@@ -1,4 +1,8 @@
 import os
+
+os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
+
 import json
 import joblib
 import gc
@@ -51,7 +55,7 @@ async def predict_risk(request: Request):
         patient_data = np.array([[d['hr'], d['bp'], d['rr'], d['spo2']] for d in data])
         patient_flat = patient_data.reshape(-1, 4)
         patient_scaled = scaler.transform(patient_flat)
-        patient_ready = patient_scaled.reshape(1, 24, 4)
+        patient_ready = patient_scaled.reshape(1, 24, 4).astype(np.float32)
         
         prediction = model.predict(patient_ready, verbose=0)
         risk_percentage = float(prediction[0][0]) * 100
