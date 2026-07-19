@@ -68,3 +68,6 @@ with gr.Blocks() as demo:
     gr.Markdown("# 📈 CareFlow AI Live API running on ZeroGPU")
 
 app = gr.mount_gradio_app(app, demo, path="/")
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="127.0.0.1", port=7860)
